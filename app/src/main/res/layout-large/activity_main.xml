@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/id_fragment_movie_list"
-        class="me.sahilmidha.myapps.movie_maniac.MovieListFragment"
+        class="me.sahilmidha.myapps.movie_maniac.ui.fragment.MoviesListFragment"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="match_parent" />

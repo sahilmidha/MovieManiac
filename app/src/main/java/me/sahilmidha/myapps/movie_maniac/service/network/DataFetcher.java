@@ -1,6 +1,7 @@
 package me.sahilmidha.myapps.movie_maniac.service.network;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -48,6 +49,7 @@ public class DataFetcher
             {
                 url = new java.net.URL(requestBuilder.getRequestUrl());
 
+
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setReadTimeout(REQUEST_READ_TIME_OUT);
                 connection.setConnectTimeout(REQUEST_CONNECTION_TIME_OUT);
@@ -64,6 +66,7 @@ public class DataFetcher
                 {
                     throw new Exception();
                 }
+
                 //Get Response
                 InputStream is = connection.getInputStream();
                 BufferedReader rd = new BufferedReader(new InputStreamReader(is));

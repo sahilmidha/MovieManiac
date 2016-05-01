@@ -1,4 +1,4 @@
-package me.sahilmidha.myapps.movie_maniac;
+package me.sahilmidha.myapps.movie_maniac.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,11 +12,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import me.sahilmidha.myapps.movie_maniac.R;
+import me.sahilmidha.myapps.movie_maniac.service.model.Movie;
+
 /**
  * Created by Sahil Midha on 3/2/2016.
  * A customer ArrayAdapter which takes Movies Objects to help populate data in GridView
  */
-public class MoviesAdapter extends ArrayAdapter<Movies> {
+public class MoviesAdapter extends ArrayAdapter<Movie> {
     private static final String LOG_TAG = MoviesAdapter.class.getSimpleName();
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
@@ -26,7 +29,7 @@ public class MoviesAdapter extends ArrayAdapter<Movies> {
      * @param context        The current context. Used to inflate the layout file.
      * @param movies A List of Movies objects to display in a list
      */
-    public MoviesAdapter(Context context, List<Movies> movies) {
+    public MoviesAdapter(Context context, List<Movie> movies) {
         super(context, 0, movies);
     }
     /**
@@ -41,7 +44,7 @@ public class MoviesAdapter extends ArrayAdapter<Movies> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Gets the Movies object from the ArrayAdapter at the appropriate position
-        Movies movies = getItem(position);
+        Movie movies = getItem(position);
 
         // Adapters recycle views to AdapterViews.
         // If this is a new View object we're getting, then inflate the layout.
@@ -55,7 +58,7 @@ public class MoviesAdapter extends ArrayAdapter<Movies> {
         imageView.setBackgroundColor(Color.rgb(210,210,210));
 
         Picasso.with(getContext())
-                .load(movies.poster_url)
+                .load(movies.getPosterPath())
                 .resize(185,278)
                 .centerCrop()
                 .onlyScaleDown()

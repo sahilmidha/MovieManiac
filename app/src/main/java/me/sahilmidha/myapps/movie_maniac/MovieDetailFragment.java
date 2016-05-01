@@ -27,6 +27,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.sahilmidha.myapps.movie_maniac.service.model.Movie;
+
 
 /**
  * This class receives movieId and fetches details of a movie as soon as the fragment becomes visible and populates UI.
@@ -35,7 +37,7 @@ public class MovieDetailFragment extends Fragment {
 
     private long movieId;
     private final static String MOVIE_ID = "movieId";
-    private Movies movie;
+    private Movie movie;
     public MovieDetailFragment() {
         // Required empty public constructor
     }
@@ -71,7 +73,7 @@ public class MovieDetailFragment extends Fragment {
         this.movieId = movieId;
     }
 
-    private class FetchMovieDataTask extends AsyncTask<Long, Void, Movies> {
+    private class FetchMovieDataTask extends AsyncTask<Long, Void, Movie> {
         // now we use LOG_TAG variable and assign it like this below so that whenever class name changes, both would be in sync.
         private final String LOG_TAG = FetchMovieDataTask.class.getSimpleName();
 
@@ -83,7 +85,7 @@ public class MovieDetailFragment extends Fragment {
          * @return
          */
         @Override
-        protected Movies doInBackground(Long... params) {
+        protected Movie doInBackground(Long... params) {
 
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
@@ -163,7 +165,7 @@ public class MovieDetailFragment extends Fragment {
          * Take the String representing the complete movieData in JSON Format and
          * pull out the data we need to construct the Strings needed for the wireframes.
          * */
-        private Movies getMovieDataFromJson(String movieJsonStr)
+        private Movie getMovieDataFromJson(String movieJsonStr)
                 throws JSONException {
 
             // These are the names of the JSON objects that need to be extracted.
@@ -190,7 +192,7 @@ public class MovieDetailFragment extends Fragment {
             plot = movieJson.getString(PLOT);
             rating = movieJson.getLong(RATING);
 
-            movie = new Movies(id, poster_url, title, plot, rating, releaseDate);
+            //movie = new Movie(id, poster_url, title, plot, rating, releaseDate);
 
             /*for (Movies m : moviesList) {
                 Log.v(LOG_TAG, "POSTER URL: " + m.toString());
@@ -205,10 +207,10 @@ public class MovieDetailFragment extends Fragment {
          * @param movie
          */
         @Override
-        protected void onPostExecute(Movies movie) {
+        protected void onPostExecute(Movie movie) {
             //this method runs on main thread
             View view = getView();
-            if(movie != null
+            /*if(movie != null
                     && view != null){
                 TextView textViewTitle = (TextView) view.findViewById(R.id.id_textView_original_title);
                 textViewTitle.setText(movie.getTitle());
@@ -226,7 +228,7 @@ public class MovieDetailFragment extends Fragment {
                         .centerCrop()
                         .onlyScaleDown()
                         .into(imageViewPoster);
-            }
+            }*/
 
         }
     }

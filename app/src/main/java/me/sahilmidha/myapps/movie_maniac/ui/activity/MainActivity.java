@@ -1,4 +1,4 @@
-package me.sahilmidha.myapps.movie_maniac;
+package me.sahilmidha.myapps.movie_maniac.ui.activity;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -10,10 +10,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import me.sahilmidha.myapps.movie_maniac.MovieDetailActivity;
+import me.sahilmidha.myapps.movie_maniac.MovieDetailFragment;
+import me.sahilmidha.myapps.movie_maniac.R;
+import me.sahilmidha.myapps.movie_maniac.SettingsActivity;
+import me.sahilmidha.myapps.movie_maniac.ui.fragment.MoviesListFragment;
+
 /**
  * This is the launcher Activity. It inflates 2 layouts, one each for phone and tablet.
  */
-public class MainActivity extends AppCompatActivity implements MovieListFragment.MovieListListener{
+public class MainActivity extends AppCompatActivity implements MoviesListFragment.MovieListListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

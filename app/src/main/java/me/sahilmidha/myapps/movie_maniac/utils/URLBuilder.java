@@ -11,13 +11,16 @@ import me.sahilmidha.myapps.movie_maniac.R;
  */
 public class URLBuilder
 {
-    private static final String BASE_URL = "http://api.themoviedb.org/3/";
+    private static final String BASE_URL = "http://api.themoviedb.org/3";
     private static final String MOVIES_EXPLORE = "/discover/movie";
     private static final String MOVIE_DETAILS = "/movie/";
 
 
     public static String getMoviesListRequest(String sortBy)
     {
+        if(sortBy == null){
+            sortBy = "popularity.desc";
+        }
         if(sortBy.equalsIgnoreCase("vote_average.desc"))
         {
             return String.format("%s%s?sort_by=%s&vote_count.gte=50&api_key=", BASE_URL, MOVIES_EXPLORE, sortBy);
