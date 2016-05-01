@@ -46,7 +46,7 @@ public class MovieListDataProcessor implements iDataProcessor
 
     }
 
-    public ArrayList<Movie> getVenuesVO()
+    public ArrayList<Movie> getMoviesArrayList()
     {
         return _moviesArrayList;
     }

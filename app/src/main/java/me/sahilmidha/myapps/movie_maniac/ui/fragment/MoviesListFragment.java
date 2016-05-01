@@ -111,7 +111,16 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
     @Override
     public void onWebServiceSuccess(iDataProcessor dataProcessor)
     {
+        if (dataProcessor instanceof MovieListDataProcessor)
+        {
 
+            MovieListDataProcessor processor = (MovieListDataProcessor) dataProcessor;
+            if(null != processor.getMoviesArrayList()){
+                moviesAdapter.clear();
+                moviesAdapter.addAll(processor.getMoviesArrayList());
+                //moviesAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
     @Override

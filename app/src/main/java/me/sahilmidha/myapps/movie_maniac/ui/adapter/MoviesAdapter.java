@@ -55,10 +55,11 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
                     R.layout.image_layout, parent, false);
         }
         ImageView imageView = (ImageView) convertView.findViewById(R.id.id_image_view_movie_list);
-        imageView.setBackgroundColor(Color.rgb(210,210,210));
-
+        imageView.setBackgroundColor(Color.rgb(210, 210, 210));
+        String poster_url = (String)getContext().getString(R.string.poster_url);
+        poster_url = poster_url.concat(movies.getPosterPath());
         Picasso.with(getContext())
-                .load(movies.getPosterPath())
+                .load(poster_url)
                 .resize(185,278)
                 .centerCrop()
                 .onlyScaleDown()
