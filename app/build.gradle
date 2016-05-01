@@ -27,4 +27,6 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'org.glassfish.main:javax.annotation:4.0-b33'
+
 }
