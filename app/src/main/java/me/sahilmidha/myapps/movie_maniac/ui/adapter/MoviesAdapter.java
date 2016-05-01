@@ -2,11 +2,14 @@ package me.sahilmidha.myapps.movie_maniac.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -17,54 +20,97 @@ import me.sahilmidha.myapps.movie_maniac.service.model.Movie;
 
 /**
  * Created by Sahil Midha on 3/2/2016.
- * A customer ArrayAdapter which takes Movies Objects to help populate data in GridView
+ * A  RecyclerView Adapter which takes Movies Objects to help populate data in RecyclerView
  */
-public class MoviesAdapter extends ArrayAdapter<Movie> {
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
     private static final String LOG_TAG = MoviesAdapter.class.getSimpleName();
-    /**
-     * This is our own custom constructor (it doesn't mirror a superclass constructor).
-     * The context is used to inflate the layout file, and the List is the data we want
-     * to populate into the lists
-     *
-     * @param context        The current context. Used to inflate the layout file.
-     * @param movies A List of Movies objects to display in a list
-     */
-    public MoviesAdapter(Context context, List<Movie> movies) {
-        super(context, 0, movies);
-    }
-    /**
-     * Provides a view for an AdapterView (ListView, GridView, etc.)
-     *
-     * @param position    The AdapterView position that is requesting a view
-     * @param convertView The recycled view to populate.
-     *                    (search online for "android view recycling" to learn more)
-     * @param parent The parent ViewGroup that is used for inflation.
-     * @return The View for the position in the AdapterView.
-     */
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Gets the Movies object from the ArrayAdapter at the appropriate position
-        Movie movies = getItem(position);
 
-        // Adapters recycle views to AdapterViews.
-        // If this is a new View object we're getting, then inflate the layout.
-        // If not, this view already has the layout inflated from a previous call to getView,
-        // and we modify the View widgets as usual.
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.image_layout, parent, false);
+    public static interface OnCardViewClickListener {
+        void onCardViewItemClick(Movie movie);
+    }
+
+    private final OnCardViewClickListener mListener;
+
+    private List<Movie> mDataset;
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public CardView mCardView;
+        public ViewHolder(View v) {
+            super(v);
+            mCardView = (CardView)v;
         }
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.id_image_view_movie_list);
-        imageView.setBackgroundColor(Color.rgb(210, 210, 210));
-        String poster_url = (String)getContext().getString(R.string.poster_url);
-        poster_url = poster_url.concat(movies.getPosterPath());
-        Picasso.with(getContext())
+
+        public void bindListener(final Movie movie, final OnCardViewClickListener listener) {
+
+            mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onCardViewItemClick(movie);
+                }
+            });
+        }
+    }
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public MoviesAdapter(List<Movie> myDataset, OnCardViewClickListener listener) {
+        mDataset = myDataset;
+        mListener = listener;
+
+    }
+
+    // Create new views (invoked by the layout manager)
+    @Override
+    public MoviesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                   int viewType) {
+        // create a new view
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.image_layout, parent, false);
+        // set the view's size, margins, paddings and layout parameters
+
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Movie movie = mDataset.get(position);
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        ImageView imageView = (ImageView) holder.mCardView.findViewById(R.id.id_image_view_movie_list);
+        //imageView.setBackgroundColor(Color.rgb(210, 210, 210));
+        String poster_url = imageView.getContext().getString(R.string.poster_url);
+        poster_url = poster_url.concat(movie.getPosterPath());
+        Picasso.with(imageView.getContext())
                 .load(poster_url)
-                .resize(185,278)
-                .centerCrop()
-                .onlyScaleDown()
                 .into(imageView);
 
-        return convertView;
+        TextView textViewTitle = (TextView) holder.mCardView.findViewById(R.id.id_textView_original_title);
+        textViewTitle.setText(movie.getOriginalTitle());
+
+        TextView textViewRating = (TextView) holder.mCardView.findViewById(R.id.id_textView_rating);
+        textViewRating.setText(movie.getVoteAverage().toString());
+
+        TextView textViewTotalRating = (TextView) holder.mCardView.findViewById(R.id.id_textView_RatingTotal);
+        textViewTotalRating.setText("/10");
+
+        TextView textViewTotalVotes = (TextView) holder.mCardView.findViewById(R.id.id_textView_totalVotes);
+        textViewTotalVotes.setText(movie.getVoteCount().toString());
+
+        TextView textViewReleaseDate = (TextView) holder.mCardView.findViewById(R.id.id_textView_release_date);
+        textViewReleaseDate.setText(movie.getReleaseDate().substring(0,4));
+
+        holder.bindListener(movie, mListener);
     }
+
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
+    }
+
 }

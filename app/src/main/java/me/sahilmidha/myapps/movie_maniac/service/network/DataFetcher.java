@@ -60,7 +60,7 @@ public class DataFetcher
                 connection.setUseCaches(false);
                 //connection.setDoInput(false);
                 //connection.setDoOutput(true);
-
+                Log.v("DataFetcher", url.toString());
                 int statusCode = connection.getResponseCode();
                 if (statusCode != HttpURLConnection.HTTP_OK)
                 {

@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import me.sahilmidha.myapps.movie_maniac.MovieDetailActivity;
 import me.sahilmidha.myapps.movie_maniac.MovieDetailFragment;
 import me.sahilmidha.myapps.movie_maniac.R;
 import me.sahilmidha.myapps.movie_maniac.SettingsActivity;
+import me.sahilmidha.myapps.movie_maniac.service.model.Movie;
 import me.sahilmidha.myapps.movie_maniac.ui.fragment.MoviesListFragment;
 
 /**
@@ -46,11 +48,11 @@ public class MainActivity extends AppCompatActivity implements MoviesListFragmen
         }
         return super.onOptionsItemSelected(item);
     }
-    //Implement MovieListFragment.MovieListListener method itemClick to handle clicks on GridView on MovieListFragment.java
+    //Implement MovieListFragment.MovieListListener method itemClick to handle clicks on RecyclerView on MovieListFragment.java
     //See MovieListFragment.java for more information on this.
     @Override
-    public void itemClick(long id) {
-        View fragmentContainer = findViewById(R.id.id_fragment_container_movie_detail);
+    public void itemClick(Movie movie) {
+        /*View fragmentContainer = findViewById(R.id.id_fragment_container_movie_detail);
         //Check if the view contains 'fragmentContainer', If it does, it is a tablet layout.
         //and so initialise the MovieDetailFragment and replace it in the frameLayout in activity_main.xml
         if(null != fragmentContainer) {
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements MoviesListFragmen
             Intent intent = new Intent(this, MovieDetailActivity.class);
             intent.putExtra(MovieDetailActivity.MOVIE_ID, id);
             startActivity(intent);
-        }
+        }*/
+        Toast.makeText(this, movie.getOriginalTitle(), Toast.LENGTH_SHORT).show();
+
     }
 }

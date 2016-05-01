@@ -6,11 +6,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +31,7 @@ import me.sahilmidha.myapps.movie_maniac.utils.URLBuilder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MoviesListFragment extends Fragment implements iWebServiceResponseListener
+public class MoviesListFragment extends Fragment implements iWebServiceResponseListener, MoviesAdapter.OnCardViewClickListener
 {
 
 
@@ -39,7 +43,7 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
 
     //Create an interface which an activity can implement so that it listens to clicks in fragments
     public static interface MovieListListener{
-        void itemClick(long id);
+        void itemClick(Movie movie);
     };
     //We will initialise this listener in OnAttach method. This is going to be the activity which is going to implement this interface.
     private MovieListListener movieListListener;
@@ -64,8 +68,8 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
         //Doubt here -- when to use below technique to get SharedPreferences
         //SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         String sortBy = sharedPreferences.getString(getString(R.string.pref_sort_key), getString(R.string.pref_sort_default));
-
-        ApplicationController.getInstance().getWebServiceManager().createGetRequest(this, new MovieListDataProcessor(), URLBuilder.getMoviesListRequest("popularity")+getString(R.string.api_key_theMovieDb));
+        Log.v("ListFragment", URLBuilder.getMoviesListRequest(sortBy).concat(getString(R.string.api_key_theMovieDb)));
+        ApplicationController.getInstance().getWebServiceManager().createGetRequest(this, new MovieListDataProcessor(), URLBuilder.getMoviesListRequest(sortBy).concat(getString(R.string.api_key_theMovieDb)));
     }
 
     /**
@@ -81,7 +85,7 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
         // Inflate the layout for this fragment
         //NOTE: i am using same 2 columns gridView for both phone and tablet. This looks better on tablet too.
         //What if I don't put fragment_movie_list.xml in layout-large? Will it break for the tablet?
-        View rootView = inflater.inflate(R.layout.fragment_movie_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_movies_list, container, false);
 
 
         /*
@@ -90,21 +94,27 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
         as we can never be sure when the thread stops execution.
         */
         moviesList = new ArrayList<Movie>();
-        moviesAdapter = new MoviesAdapter(inflater.getContext(), moviesList);
+        moviesAdapter = new MoviesAdapter(moviesList, this);
 
-        // Get a reference to the ListView, and attach this adapter to it.
-        GridView gridView = (GridView) rootView.findViewById(R.id.id_grid_view_movie_list);
-        gridView.setAdapter(moviesAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Movie movies = moviesAdapter.getItem(position);
-                if(null != movieListListener) {
-                    //Call the MovieListListener's itemClick method here.
-                    movieListListener.itemClick(movies.getId());
-                }
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.id_recycler_view_fragment_movie_list);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+
+        // use a grid layout manager
+        RecyclerView.LayoutManager LayoutManager = new GridLayoutManager(getActivity(),2);
+        recyclerView.setLayoutManager(LayoutManager);
+
+        // specify an adapter (see also next example)
+        recyclerView.setAdapter(moviesAdapter);
+
+        //If you don't want to implement OnCardViewClickListener above, you can do this here through anonymous class
+        /*recyclerView.setAdapter(new MoviesAdapter(moviesList, new MoviesAdapter.OnCardViewClickListener() {
+            @Override public void onItemClick(Movie movie) {
+                Toast.makeText(getContext(), "Item Clicked", Toast.LENGTH_LONG).show();
             }
-        });
+        }));*/
         return rootView;
     }
 
@@ -116,9 +126,9 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
 
             MovieListDataProcessor processor = (MovieListDataProcessor) dataProcessor;
             if(null != processor.getMoviesArrayList()){
-                moviesAdapter.clear();
-                moviesAdapter.addAll(processor.getMoviesArrayList());
-                //moviesAdapter.notifyDataSetChanged();
+                moviesList.clear();
+                moviesList.addAll(processor.getMoviesArrayList());
+                moviesAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -129,4 +139,10 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
 
     }
 
+    @Override
+    public void onCardViewItemClick(Movie movie)
+    {
+        movieListListener.itemClick(movie);
+
+    }
 }
