@@ -8,7 +8,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Generated("org.jsonschema2pojo")
-public class Result {
+public class Movie
+{
 
     @SerializedName("poster_path")
     @Expose
@@ -51,10 +52,10 @@ public class Result {
     private Boolean video;
     @SerializedName("vote_average")
     @Expose
-    private Integer voteAverage;
+    private Float voteAverage;
 
     /**
-     * 
+     *
      * @return
      *     The posterPath
      */
@@ -63,7 +64,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param posterPath
      *     The poster_path
      */
@@ -72,7 +73,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The adult
      */
@@ -81,7 +82,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param adult
      *     The adult
      */
@@ -90,7 +91,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The overview
      */
@@ -99,7 +100,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param overview
      *     The overview
      */
@@ -108,7 +109,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The releaseDate
      */
@@ -117,7 +118,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param releaseDate
      *     The release_date
      */
@@ -126,7 +127,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The genreIds
      */
@@ -135,7 +136,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param genreIds
      *     The genre_ids
      */
@@ -144,7 +145,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The id
      */
@@ -153,7 +154,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param id
      *     The id
      */
@@ -162,7 +163,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The originalTitle
      */
@@ -171,7 +172,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param originalTitle
      *     The original_title
      */
@@ -180,7 +181,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The originalLanguage
      */
@@ -189,7 +190,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param originalLanguage
      *     The original_language
      */
@@ -198,7 +199,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The title
      */
@@ -207,7 +208,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param title
      *     The title
      */
@@ -216,7 +217,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The backdropPath
      */
@@ -225,7 +226,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param backdropPath
      *     The backdrop_path
      */
@@ -234,7 +235,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The popularity
      */
@@ -243,7 +244,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param popularity
      *     The popularity
      */
@@ -252,7 +253,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The voteCount
      */
@@ -261,7 +262,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param voteCount
      *     The vote_count
      */
@@ -270,7 +271,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The video
      */
@@ -279,7 +280,7 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @param video
      *     The video
      */
@@ -288,20 +289,20 @@ public class Result {
     }
 
     /**
-     * 
+     *
      * @return
      *     The voteAverage
      */
-    public Integer getVoteAverage() {
+    public Float getVoteAverage() {
         return voteAverage;
     }
 
     /**
-     * 
+     *
      * @param voteAverage
      *     The vote_average
      */
-    public void setVoteAverage(Integer voteAverage) {
+    public void setVoteAverage(Float voteAverage) {
         this.voteAverage = voteAverage;
     }
 
