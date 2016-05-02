@@ -14,6 +14,8 @@ public class URLBuilder
     private static final String BASE_URL = "http://api.themoviedb.org/3/movie/";
     private static final String POPULAR = "popular";
     private static final String TOP_RATED = "top_rated";
+    private static final String REVIEWS = "reviews";
+    private static final String TRAILER = "videos";
 
 
     public static String getMoviesListRequest(String sortBy)
@@ -35,5 +37,13 @@ public class URLBuilder
     {
         return String.format("%s%s?api_key=", BASE_URL, movieId);
     }
+    public static String getMovieReviewsRequest(String movieId)
+    {
+        return String.format("%s%s/%s?api_key=", BASE_URL, movieId, REVIEWS);
+    }
 
+    public static String getMovieTrailerRequest(String movieId)
+    {
+        return String.format("%s%s/%s?api_key=", BASE_URL, movieId, TRAILER);
+    }
 }

@@ -43,7 +43,7 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
 
     //Create an interface which an activity can implement so that it listens to clicks in fragments
     public static interface MovieListListener{
-        void itemClick(Movie movie);
+        void itemClick(Long movieId);
     };
     //We will initialise this listener in OnAttach method. This is going to be the activity which is going to implement this interface.
     private MovieListListener movieListListener;
@@ -68,7 +68,7 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
         //Doubt here -- when to use below technique to get SharedPreferences
         //SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         String sortBy = sharedPreferences.getString(getString(R.string.pref_sort_key), getString(R.string.pref_sort_default));
-        Log.v("ListFragment", URLBuilder.getMoviesListRequest(sortBy).concat(getString(R.string.api_key_theMovieDb)));
+        //Log.v("ListFragment", URLBuilder.getMoviesListRequest(sortBy).concat(getString(R.string.api_key_theMovieDb)));
         ApplicationController.getInstance().getWebServiceManager().createGetRequest(this, new MovieListDataProcessor(), URLBuilder.getMoviesListRequest(sortBy).concat(getString(R.string.api_key_theMovieDb)));
     }
 
@@ -136,13 +136,13 @@ public class MoviesListFragment extends Fragment implements iWebServiceResponseL
     @Override
     public void onWebServiceFailed()
     {
-
+        Toast.makeText(getActivity(),getString(R.string.network_error), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onCardViewItemClick(Movie movie)
     {
-        movieListListener.itemClick(movie);
+        movieListListener.itemClick(movie.getId().longValue());
 
     }
 }

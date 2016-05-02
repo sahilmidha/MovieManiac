@@ -29,7 +29,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />
         </activity>
-        <activity android:name=".MovieDetailActivity"
+        <activity android:name=".ui.activity.MovieDetailActivity"
             android:label="@string/movie_details"
             android:parentActivityName=".ui.activity.MainActivity">
         </activity>
