@@ -29,7 +29,6 @@
     <string name="title_activity_favorite_movies">FavoriteMoviesActivity</string>
 
     <string name="No_favourites">No Favourites yet!</string>
-    <string name="padding_review">4dp</string>
 
 
 </resources>

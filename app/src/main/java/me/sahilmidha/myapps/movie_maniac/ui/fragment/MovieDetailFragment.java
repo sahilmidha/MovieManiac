@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,7 +132,7 @@ public class MovieDetailFragment extends Fragment implements iWebServiceResponse
             else if (dataProcessor instanceof MovieReviewsDataProcessor)
             {
                 _reviewsList.clear();
-                _reviewsList.addAll(((MovieReviewsDataProcessor)dataProcessor).getMoviesReviewsArrayList());
+                _reviewsList.addAll(((MovieReviewsDataProcessor) dataProcessor).getMoviesReviewsArrayList());
                 _reviewsAdapter.notifyDataSetChanged();
             }
 

@@ -6,25 +6,25 @@
         android:id="@+id/textView_reviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@string/padding_review"
+        android:padding="@dimen/five_dp"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"/>
     <TextView
         android:id="@+id/textView_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@string/padding_review"
+        android:padding="@dimen/five_dp"
         />
     <TextView
         android:id="@+id/textView_reviewByText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@string/padding_review"
+        android:padding="@dimen/five_dp"
         android:textAppearance="@android:style/TextAppearance.Holo.Medium"
         />
     <TextView
         android:id="@+id/textView_reviewBy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@string/padding_review"
+        android:padding="@dimen/five_dp"
         />
 </LinearLayout>

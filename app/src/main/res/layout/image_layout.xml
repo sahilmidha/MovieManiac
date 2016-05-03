@@ -5,10 +5,10 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:elevation="1dp"
-    android:padding="8dp"
-    card_view:cardCornerRadius="4dp">
+    android:layout_margin="@dimen/five_dp"
+    android:elevation="@dimen/one_dp"
+    android:padding="@dimen/eight_dp"
+    card_view:cardCornerRadius="@dimen/four_dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,11 +27,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/id_image_view_movie_list"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
+            android:paddingLeft="@dimen/five_dp"
+            android:paddingTop="@dimen/five_dp"
             android:singleLine="true"
-            android:textSize="13dp"
-            android:layout_marginLeft="2dp"/>
+            android:textSize="@dimen/thirteen_dp"
+            android:layout_marginLeft="@dimen/two_dp"/>
 
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -53,8 +53,8 @@
                     android:id="@+id/id_textView_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="1dp"
-                    android:textSize="12dp"
+                    android:paddingTop="@dimen/one_dp"
+                    android:textSize="@dimen/twelve_dp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -62,8 +62,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/id_textView_rating"
-                    android:paddingTop="5dp"
-                    android:textSize="8dp"/>
+                    android:paddingTop="@dimen/five_dp"
+                    android:textSize="@dimen/eight_dp"/>
 
                 <TextView
                     android:id="@+id/id_textView_totalVotes"
@@ -72,16 +72,16 @@
                     android:layout_alignLeft="@+id/id_textView_rating"
                     android:layout_below="@+id/id_textView_rating"
                     android:layout_marginTop="-3dp"
-                    android:textSize="12dp"/>
+                    android:textSize="@dimen/twelve_dp"/>
                 <TextView
                     android:id="@+id/id_textView_release_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="5dp"
-                    android:layout_marginRight="2dp"
+                    android:paddingRight="@dimen/five_dp"
+                    android:layout_marginRight="@dimen/two_dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textSize="12dp"/>
+                    android:textSize="@dimen/twelve_dp"/>
 
             </RelativeLayout>
         </LinearLayout>
