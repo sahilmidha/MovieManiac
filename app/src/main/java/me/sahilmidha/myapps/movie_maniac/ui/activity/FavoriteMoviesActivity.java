@@ -2,31 +2,30 @@ package me.sahilmidha.myapps.movie_maniac.ui.activity;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import me.sahilmidha.myapps.movie_maniac.ui.fragment.MovieDetailFragment;
 import me.sahilmidha.myapps.movie_maniac.R;
 import me.sahilmidha.myapps.movie_maniac.SettingsActivity;
-import me.sahilmidha.myapps.movie_maniac.service.model.Movie;
-import me.sahilmidha.myapps.movie_maniac.ui.fragment.MoviesListFragment;
+import me.sahilmidha.myapps.movie_maniac.ui.fragment.FavouriteMoviesListFragment;
+import me.sahilmidha.myapps.movie_maniac.ui.fragment.MovieDetailFragment;
 
-/**
- * This is the launcher Activity. It inflates 2 layouts, one each for phone and tablet.
- */
-public class MainActivity extends AppCompatActivity implements MoviesListFragment.MovieListListener{
+public class FavoriteMoviesActivity extends AppCompatActivity implements FavouriteMoviesListFragment.MovieListListener{
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        //defined 2 activity_main.xml - one for phone and other for tablet. Android will pick the right one itself.
-        setContentView(R.layout.activity_main);
-        //now the layout has been populated above through setContentView, we can take out it's reference of the fragment
+        setContentView(R.layout.activity_favorite_movies);
+
+
     }
     //Override onCreateOptionsMenu and onOptionsItemSelected for handling Menu Item clicks
     @Override
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements MoviesListFragmen
             startActivity(intent);
         }
         else if(R.id.action_favorite == id){
-            Intent intent = new Intent(this, FavoriteMoviesActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(Intent.EXTRA_TEXT, id);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -74,4 +74,5 @@ public class MainActivity extends AppCompatActivity implements MoviesListFragmen
             startActivity(intent);
         }
     }
+
 }

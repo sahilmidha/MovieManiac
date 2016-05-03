@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -17,11 +18,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import me.sahilmidha.myapps.movie_maniac.R;
 import me.sahilmidha.myapps.movie_maniac.ui.fragment.MovieDetailFragment;
@@ -85,23 +86,21 @@ public class MovieDetailActivity extends AppCompatActivity
     }
 
     public void onClickMarkFavorite(View v){
-        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.favorite_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         String value = sharedPreferences.getString(getString(R.string.favorite_key), null);
-        if(value != null){
-            String[] strArray = value.split(",");
-            Set<String> mySet = new HashSet<String>(Arrays.asList(strArray));
-
-             if(((CheckBox)v).isChecked()
-                     && !mySet.contains(movieDetailFragment.getMovieId().toString())){
-                 mySet.add(movieDetailFragment.getMovieId().toString());
-             }
-             else if(mySet.contains(movieDetailFragment.getMovieId().toString())){
-                 mySet.remove(movieDetailFragment.getMovieId().toString());
-             }
-            strArray = mySet.toArray(new String[mySet.size()]);
-            value = Arrays.toString(strArray);
+        if(value != null
+                && !value.isEmpty()){
+            if(((CheckBox)v).isChecked()
+                    && !value.contains(movieDetailFragment.getMovieId().toString())){
+                value = value.concat("," + movieDetailFragment.getMovieId().toString());
+            }
+            else if(value.contains(movieDetailFragment.getMovieId().toString())){
+                List<String> myList = new ArrayList<String>(Arrays.asList(value.split(",")));
+                myList.remove(movieDetailFragment.getMovieId().toString());
+                value = TextUtils.join(",", myList);
+            }
 
             editor.putString(getString(R.string.favorite_key), value);
             editor.commit();

@@ -42,7 +42,7 @@ public class MovieReviewsDataProcessor implements iDataProcessor
 
     }
 
-    public ArrayList<Reviews> getMovieReviewsObject()
+    public ArrayList<Reviews> getMoviesReviewsArrayList()
     {
         return _moviesReviewsArrayList;
     }

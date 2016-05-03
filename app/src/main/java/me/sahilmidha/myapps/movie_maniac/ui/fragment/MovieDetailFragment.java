@@ -9,26 +9,33 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.sahilmidha.myapps.movie_maniac.R;
 import me.sahilmidha.myapps.movie_maniac.service.controller.ApplicationController;
 import me.sahilmidha.myapps.movie_maniac.service.iWebServiceResponseListener;
 import me.sahilmidha.myapps.movie_maniac.service.model.details.MovieDetail;
+import me.sahilmidha.myapps.movie_maniac.service.model.details.reviews.Reviews;
 import me.sahilmidha.myapps.movie_maniac.service.model.details.video.Trailer;
 import me.sahilmidha.myapps.movie_maniac.service.processor.MovieDetailDataProcessor;
 import me.sahilmidha.myapps.movie_maniac.service.processor.MovieReviewsDataProcessor;
 import me.sahilmidha.myapps.movie_maniac.service.processor.MovieTrailerDataProcessor;
 import me.sahilmidha.myapps.movie_maniac.service.processor.iDataProcessor;
+import me.sahilmidha.myapps.movie_maniac.ui.adapter.ReviewsAdapter;
 import me.sahilmidha.myapps.movie_maniac.utils.URLBuilder;
 
 
@@ -40,6 +47,8 @@ public class MovieDetailFragment extends Fragment implements iWebServiceResponse
     private Long movieId;
     private final static String MOVIE_ID = "movieId";
     private String mediaUrl;
+    private List<Reviews> _reviewsList;
+    private ReviewsAdapter _reviewsAdapter;
 
     public MovieDetailFragment() {
         // Required empty public constructor
@@ -63,7 +72,13 @@ public class MovieDetailFragment extends Fragment implements iWebServiceResponse
             movieId = savedInstanceState.getLong(MOVIE_ID);
         }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        _reviewsList = new ArrayList<Reviews>();
+        _reviewsAdapter = new ReviewsAdapter(_reviewsList);
+        ListView listView = (ListView) view.findViewById(R.id.list_view_reviews);
+        listView.setAdapter(_reviewsAdapter);
+
+        return view;
     }
 
     @Override
@@ -94,8 +109,7 @@ public class MovieDetailFragment extends Fragment implements iWebServiceResponse
             if (dataProcessor instanceof MovieDetailDataProcessor)
             {
                 MovieDetail movieDetail = ((MovieDetailDataProcessor) dataProcessor).getMovieDetailObject();
-                TextView textViewTitle = (TextView) view.findViewById(R.id.id_textView_original_title);
-                textViewTitle.setText(movieDetail.getTitle());
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(movieDetail.getTitle());
                 TextView textViewDate = (TextView) view.findViewById(R.id.id_textView_release_date);
                 textViewDate.setText(movieDetail.getReleaseDate().substring(0, 4));
                 TextView textViewRating = (TextView) view.findViewById(R.id.id_textView_rating);
@@ -116,7 +130,9 @@ public class MovieDetailFragment extends Fragment implements iWebServiceResponse
             }
             else if (dataProcessor instanceof MovieReviewsDataProcessor)
             {
-                Log.v("MovieReviewsDataProcess", ((MovieReviewsDataProcessor) dataProcessor).getMovieReviewsObject().toString());
+                _reviewsList.clear();
+                _reviewsList.addAll(((MovieReviewsDataProcessor)dataProcessor).getMoviesReviewsArrayList());
+                _reviewsAdapter.notifyDataSetChanged();
             }
 
             else if (dataProcessor instanceof MovieTrailerDataProcessor)
@@ -125,8 +141,8 @@ public class MovieDetailFragment extends Fragment implements iWebServiceResponse
                 Trailer trailer = ((MovieTrailerDataProcessor) dataProcessor).getMoviesTrailerArrayList().get(0);
                 mediaUrl = getString(R.string.youtube_url).concat(trailer.getKey());
 
-                SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-                String favorite = sharedPreferences.getString(getString(R.string.favorite_key),null);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.favorite_key),Context.MODE_PRIVATE);
+                String favorite = sharedPreferences.getString(getString(R.string.favorite_key), null);
                 if(favorite != null
                         && favorite.contains(getMovieId().toString())){
                     ((CheckBox) view.findViewById(R.id.id_checkbox_mark_favorite)).setChecked(true);

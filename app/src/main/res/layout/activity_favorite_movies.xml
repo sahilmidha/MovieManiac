@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/id_fragment_movie_list_favorite"
+          class="me.sahilmidha.myapps.movie_maniac.ui.fragment.FavouriteMoviesListFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />

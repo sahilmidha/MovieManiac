@@ -2,105 +2,123 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnCount="2">
-
-        <TextView
-            android:id="@+id/id_textView_original_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_columnSpan="2"
-            android:layout_row="0"
-            android:autoText="true"
-            android:background="#FE5C5C"
-            android:paddingBottom="15dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="15dp"
-            android:singleLine="false"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#fefcfc"/>
-
-        <FrameLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_column="0"
-                     android:layout_row="1"
-                     android:layout_rowSpan="8">
-
-            <ImageView
-                android:id="@+id/id_imageView_thumbnail"
-                android:layout_width="185dp"
-                android:layout_height="278dp"
-                android:layout_margin="@dimen/image_thumbnail_margin"
-                android:adjustViewBounds="true"
-                android:padding="@dimen/image_poster_margin"
-                android:onClick="sendIntentYouTube"/>
-
-            <ImageView
-                android:id="@+id/id_imageview_play"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/image_thumbnail_margin"
-                android:padding="@dimen/image_poster_margin"
-                android:src="@drawable/ic_1462228700_youtube_video_social_media_play"
-                android:onClick="sendIntentYouTube"/>
-
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/id_textView_release_date"
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:padding="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold"/>
+            android:layout_gravity="center"
+            android:layout_margin="12dp"
+            android:elevation="1dp"
+            android:padding="8dp"
+            card_view:cardCornerRadius="4dp">
 
-        <TextView
-            android:id="@+id/id_textView_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="2"
-            android:text="8.68"
-            android:padding="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/id_textView_markFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="3"
-            android:layout_marginLeft="20dp"
-            android:text="Favorite"
-            android:padding="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold"/>
-        <CheckBox
-            android:id="@+id/id_checkbox_mark_favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="3"
-            android:padding="10dp"
-            android:onClick="onClickMarkFavorite"/>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="2">
 
-        <TextView
-            android:id="@+id/id_textView_plot"
+                <FrameLayout android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_column="0"
+                             android:layout_row="1"
+                             android:layout_rowSpan="8">
+
+                    <ImageView
+                        android:id="@+id/id_imageView_thumbnail"
+                        android:layout_width="185dp"
+                        android:layout_height="278dp"
+                        android:layout_margin="@dimen/image_thumbnail_margin"
+                        android:adjustViewBounds="true"
+                        android:onClick="sendIntentYouTube"
+                        android:padding="@dimen/image_poster_margin"/>
+
+                    <ImageView
+                        android:id="@+id/id_imageview_play"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/image_thumbnail_margin"
+                        android:onClick="sendIntentYouTube"
+                        android:padding="@dimen/image_poster_margin"
+                        android:src="@drawable/ic_1462228700_youtube_video_social_media_play"/>
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/id_textView_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="1"
+                    android:padding="10dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/id_textView_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="2"
+                    android:padding="10dp"
+                    android:text="8.68"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/id_textView_markFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_row="3"
+                    android:padding="10dp"
+                    android:text="Favorite"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/>
+                <CheckBox
+                    android:id="@+id/id_checkbox_mark_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="3"
+                    android:onClick="onClickMarkFavorite"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:id="@+id/id_textView_plot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_columnSpan="2"
+                    android:layout_margin="@dimen/image_poster_margin"
+                    android:layout_row="9"
+                    android:padding="@dimen/image_poster_padding"
+                    />
+
+            </GridLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view_review"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_columnSpan="2"
-            android:layout_margin="@dimen/image_poster_margin"
-            android:layout_row="9"
-            android:padding="@dimen/image_poster_padding"
-            />
+            android:layout_margin="12dp"
+            android:elevation="1dp"
+            android:padding="8dp"
+            card_view:cardCornerRadius="4dp">
+            <ListView
+                android:id="@+id/list_view_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </GridLayout>
+            </ListView>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 </ScrollView>
