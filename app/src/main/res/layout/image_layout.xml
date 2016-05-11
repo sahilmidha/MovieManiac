@@ -26,7 +26,6 @@
             android:id="@+id/id_textView_original_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/id_image_view_movie_list"
             android:paddingLeft="@dimen/five_dp"
             android:paddingTop="@dimen/five_dp"
             android:singleLine="true"
@@ -41,14 +40,10 @@
                 android:id="@+id/id_image_view_heart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/id_textView_original_title"
                 android:src="@drawable/ic_1462150239_heart"/>
 
             <RelativeLayout android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/id_textView_original_title"
-                            android:layout_toRightOf="@+id/id_image_view_heart"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/id_textView_rating"
                     android:layout_width="wrap_content"
@@ -78,8 +73,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/five_dp"
-                    android:layout_marginRight="@dimen/two_dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="@dimen/two_dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:textSize="@dimen/twelve_dp"/>
 

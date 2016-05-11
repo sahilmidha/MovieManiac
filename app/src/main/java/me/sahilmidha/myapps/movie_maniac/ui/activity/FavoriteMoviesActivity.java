@@ -54,14 +54,14 @@ public class FavoriteMoviesActivity extends AppCompatActivity implements Favouri
     //See MovieListFragment.java for more information on this.
     @Override
     public void itemClick(Long id) {
-        View fragmentContainer = findViewById(R.id.id_fragment_container_movie_detail);
+        View fragmentContainer = findViewById(R.id.id_fragment_container_movie_detail_fav);
         //Check if the view contains 'fragmentContainer', If it does, it is a tablet layout.
         //and so initialise the MovieDetailFragment and replace it in the frameLayout in activity_main.xml
         if(null != fragmentContainer) {
             MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
             movieDetailFragment.setMovieId(id);
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.id_fragment_container_movie_detail, movieDetailFragment);
+            transaction.replace(R.id.id_fragment_container_movie_detail_fav, movieDetailFragment);
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             //Add the transaction to the backStack to unable back button functionality.
             // It takes a String param you can use to label the transaction:

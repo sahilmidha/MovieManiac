@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <fragment
+        android:id="@+id/id_fragment_movie_list"
+        class="me.sahilmidha.myapps.movie_maniac.ui.fragment.FavouriteMoviesListFragment"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent" />
+    <!--Using layout_weight to signify how much space each fragment should take up on the screen-->
+    <FrameLayout
+        android:id="@+id/id_fragment_container_movie_detail_fav"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent" />
+</LinearLayout>
