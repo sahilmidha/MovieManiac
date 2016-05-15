@@ -30,7 +30,7 @@ public class FavoriteMoviesActivity extends AppCompatActivity implements Favouri
     //Override onCreateOptionsMenu and onOptionsItemSelected for handling Menu Item clicks
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_favorite,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -40,11 +40,6 @@ public class FavoriteMoviesActivity extends AppCompatActivity implements Favouri
         int id = item.getItemId();
         if(R.id.action_settings == id){
             Intent intent = new Intent(this, SettingsActivity.class);
-            intent.putExtra(Intent.EXTRA_TEXT, id);
-            startActivity(intent);
-        }
-        else if(R.id.action_favorite == id){
-            Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra(Intent.EXTRA_TEXT, id);
             startActivity(intent);
         }
