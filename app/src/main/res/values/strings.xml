@@ -26,7 +26,7 @@
     <string name="youtube_url">https://www.youtube.com/watch?v=</string>
 
     <string name="favorite_key">favorite</string>
-    <string name="title_activity_favorite_movies">FavoriteMoviesActivity</string>
+    <string name="title_activity_favorite_movies">Favorite Movies</string>
 
     <string name="No_favourites">No Favourites yet!</string>
 

@@ -86,7 +86,9 @@ public class MovieDetailFragment extends Fragment implements iWebServiceResponse
     public void onSaveInstanceState(Bundle outState) {
         /*super.onSaveInstanceState(outState);*/
         //Save movieId in the bundle before the fragment gets destroyed.
-        outState.putLong(MOVIE_ID, movieId);
+        if(null != movieId){
+            outState.putLong(MOVIE_ID, movieId);
+        }
     }
 
     public void setMovieId(Long movieId) {
