@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements MoviesListFragmen
         // if GP not present on device, open web browser
         if (!marketFound)
         {
-            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.EMPTY);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(webIntent);
         }
     }
