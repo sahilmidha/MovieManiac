@@ -37,10 +37,10 @@ public class FavoriteMoviesActivity extends AppCompatActivity implements Favouri
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_movies);
-        fragmentContainer = findViewById(R.id.id_fragment_container_movie_detail);
+        fragmentContainer = findViewById(R.id.id_fragment_container_movie_detail_fav);
         if (savedInstanceState != null && fragmentContainer != null)
         {
-            movieDetailFragment = (MovieDetailFragment) getFragmentManager().findFragmentById(R.id.id_fragment_container_movie_detail);
+            movieDetailFragment = (MovieDetailFragment) getFragmentManager().findFragmentById(R.id.id_fragment_container_movie_detail_fav);
         }
 
     }
