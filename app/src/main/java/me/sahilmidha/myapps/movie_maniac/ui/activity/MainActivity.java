@@ -34,12 +34,20 @@ import me.sahilmidha.myapps.movie_maniac.ui.fragment.MoviesListFragment;
 public class MainActivity extends AppCompatActivity implements MoviesListFragment.MovieListListener{
 
     MovieDetailFragment movieDetailFragment;
+    View fragmentContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //defined 2 activity_main.xml - one for phone and other for tablet. Android will pick the right one itself.
         setContentView(R.layout.activity_main);
         //now the layout has been populated above through setContentView, we can take out it's reference of the fragment
+
+        fragmentContainer = findViewById(R.id.id_fragment_container_movie_detail);
+        if (savedInstanceState != null && fragmentContainer != null)
+        {
+            movieDetailFragment = (MovieDetailFragment) getFragmentManager().findFragmentById(R.id.id_fragment_container_movie_detail);
+        }
+
     }
     //Override onCreateOptionsMenu and onOptionsItemSelected for handling Menu Item clicks
     @Override
